@@ -10,11 +10,13 @@ namespace ACEPSMVC.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Titulo { get; set; }
         public string Subtitulo { get; set; }
         public string LinhaFina { get; set; }
         public string ImagemDestaque { get; set; }
         public string ImagemInterna { get; set; }
+        [Required]
         public DateTime DataCriacao { get; set; }
     }
 }
