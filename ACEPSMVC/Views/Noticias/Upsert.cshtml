@@ -16,7 +16,7 @@
                 <label asp-for="Titulo"></label>
             </div>
             <div class="col-6">
-                <input asp-for="Titulo" class="text-danger" />
+                <input asp-for="Titulo" class="form-control text-danger" />
                 <span asp-validation-for="Titulo" class="text-danger"></span>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <label asp-for="Subtitulo"></label>
             </div>
             <div class="col-6">
-                <input asp-for="Subtitulo" class="text-danger" />
+                <input asp-for="Subtitulo" class="form-control text-danger" />
                 <span asp-validation-for="Subtitulo" class="text-danger"></span>
             </div>
         </div>
@@ -34,8 +34,17 @@
                 <label asp-for="LinhaFina"></label>
             </div>
             <div class="col-6">
-                <input asp-for="LinhaFina" class="text-danger" />
+                <textarea asp-for="LinhaFina" rows="5" class="form-control text-danger"></textarea>
                 <span asp-validation-for="LinhaFina" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Texto"></label>
+            </div>
+            <div class="col-6">
+                <textarea id="summernote" rows="20" cols="20" asp-for="Texto" class="text-danger"></textarea>
+                <span asp-validation-for="Texto" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
@@ -53,4 +62,16 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial.cshtml" />
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <!-- include summernote css/js -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+        $('.summernote, #summernote').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true
+        });
+    </script>
 }
