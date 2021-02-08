@@ -17,6 +17,8 @@ namespace ACEPSMVC.Models
         public string ImagemDestaque { get; set; }
         public string ImagemInterna { get; set; }
         [Required]
+        public string Texto { get; set; }
+        [Required]
         public DateTime DataCriacao { get; set; }
     }
 }

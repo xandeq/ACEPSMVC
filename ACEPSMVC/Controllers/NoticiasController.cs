@@ -11,6 +11,10 @@ namespace ACEPSMVC.Controllers
     public class NoticiasController : Controller
     {
         private readonly ContextoDBAplicacao _db;
+
+        [BindProperty]
+        public Noticias Noticia { get; set; }
+
         public NoticiasController(ContextoDBAplicacao db)
         {
             _db = db;
@@ -36,6 +40,45 @@ namespace ACEPSMVC.Controllers
             await _db.SaveChangesAsync();
             return Json(new { success = true, message = "Notícia deletada com sucesso." });
         }
+
+        public IActionResult Upsert(int? id)
+        {
+            Noticia = new Noticias();
+            if (id == null)
+            {
+                //create
+                return View(Noticia);
+            }
+            //update
+            Noticia = _db.Noticias.FirstOrDefault(u => u.Id == id);
+            if (Noticia == null)
+            {
+                return NotFound();
+            }
+            return View(Noticia);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert()
+        {
+            if (ModelState.IsValid)
+            {
+                if (Noticia.Id == 0)
+                {
+                    //create
+                    _db.Noticias.Add(Noticia);
+                }
+                else
+                {
+                    _db.Noticias.Update(Noticia);
+                }
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(Noticia);
+        }
+
         #endregion
 
         public IActionResult Index()

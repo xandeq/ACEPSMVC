@@ -60,6 +60,10 @@ namespace ACEPSMVC.Migrations
                     b.Property<string>("Subtitulo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

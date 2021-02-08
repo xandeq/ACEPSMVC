@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ACEPSMVC.Migrations
 {
-    public partial class AdicionandoNoticiasInstitucionalDB : Migration
+    public partial class CriandoTabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,7 @@ namespace ACEPSMVC.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Subtitulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LinhaFina = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagemDestaque = table.Column<string>(type: "nvarchar(max)", nullable: true),

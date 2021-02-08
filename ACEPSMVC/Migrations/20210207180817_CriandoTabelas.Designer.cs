@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ACEPSMVC.Migrations
 {
     [DbContext(typeof(ContextoDBAplicacao))]
-    [Migration("20210207170649_AdicionandoNoticiasInstitucionalDB2")]
-    partial class AdicionandoNoticiasInstitucionalDB2
+    [Migration("20210207180817_CriandoTabelas")]
+    partial class CriandoTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,6 +63,7 @@ namespace ACEPSMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Titulo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
