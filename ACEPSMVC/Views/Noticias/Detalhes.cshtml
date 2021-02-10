@@ -1,0 +1,8 @@
+﻿@model ACEPSMVC.Models.Noticias
+
+<img src="~/noticias/@Model.ImagemDestaque" class="img-fluid" />
+<h1>@Model.Titulo</h1>
+<h3>@Model.Subtitulo</h3>
+<h5>@Model.LinhaFina</h5>
+<p>@Html.Raw(Model.Texto)</p>
+<img src="~/noticias/@Model.ImagemInterna" class="img-fluid" />

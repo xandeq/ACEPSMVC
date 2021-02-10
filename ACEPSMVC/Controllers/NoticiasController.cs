@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ACEPSMVC.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,13 +13,16 @@ namespace ACEPSMVC.Controllers
 {
     public class NoticiasController : Controller
     {
+
         private readonly ContextoDBAplicacao _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         [BindProperty]
         public Noticias Noticia { get; set; }
 
-        public NoticiasController(ContextoDBAplicacao db)
+        public NoticiasController(ContextoDBAplicacao db, IWebHostEnvironment webHostEnvironment)
         {
+            _webHostEnvironment = webHostEnvironment;
             _db = db;
         }
 
@@ -24,7 +30,7 @@ namespace ACEPSMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Json(new { data = await _db.Noticias.ToListAsync() });
+            return Json(new { data = await _db.Noticias.OrderByDescending(o => o.DataCriacao).ToListAsync() });
         }
 
         [HttpDelete]
@@ -39,6 +45,12 @@ namespace ACEPSMVC.Controllers
             _db.Noticias.Remove(noticiaBanco);
             await _db.SaveChangesAsync();
             return Json(new { success = true, message = "Notícia deletada com sucesso." });
+        }
+
+        public IActionResult Detalhes(int id)
+        {
+            Noticia = _db.Noticias.FirstOrDefault(u => u.Id == id);
+            return View(Noticia);
         }
 
         public IActionResult Upsert(int? id)
@@ -64,6 +76,35 @@ namespace ACEPSMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                string caminho = _webHostEnvironment.WebRootPath + "\\noticias";
+
+                var filePath = Path.GetTempFileName();
+                foreach (var formFile in Request.Form.Files)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        using (var inputStream = new FileStream(Path.Combine(caminho, formFile.FileName), FileMode.Create))
+                        {
+                            // read file to stream
+                            formFile.CopyToAsync(inputStream);
+
+
+                            // stream to byte array
+                            byte[] array = new byte[inputStream.Length];
+                            inputStream.Seek(0, SeekOrigin.Begin);
+                            inputStream.Read(array, 0, array.Length);
+                            // get file name
+                            string fName = formFile.FileName;
+                            if (formFile.Name == "ImagemDestaque")
+                                Noticia.ImagemDestaque = formFile.FileName;
+                            else if (formFile.Name == "ImagemInterna")
+                                Noticia.ImagemInterna = formFile.FileName;
+                        }
+                    }
+                }
+
+                Noticia.DataCriacao = DateTime.Now;
+
                 if (Noticia.Id == 0)
                 {
                     //create

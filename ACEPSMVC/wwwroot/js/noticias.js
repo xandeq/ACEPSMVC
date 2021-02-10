@@ -12,10 +12,10 @@ function loadDataTable() {
             "datatype": "json"
         },
         "columns": [
+            { "data": "dataCriacao", "width": "20%" },
             { "data": "titulo", "width": "20%" },
             { "data": "subtitulo", "width": "20%" },
             { "data": "linhaFina", "width": "20%" },
-            { "data": "texto", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
