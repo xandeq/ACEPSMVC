@@ -12,14 +12,17 @@ namespace ACEPSMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ContextoDBAplicacao _db;
+        
+        public HomeController(ILogger<HomeController> logger, ContextoDBAplicacao db)
         {
             _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
         {
+            ViewData["Noticias"] = _db.Noticias.Take(10).ToList();
             return View();
         }
 
