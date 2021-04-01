@@ -22,7 +22,9 @@ namespace ACEPSMVC.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Destaques"] = _db.Destaque.ToList();
             ViewData["Noticias"] = _db.Noticias.Take(10).ToList();
+            ViewData["DestaquePrincipal"] = _db.DestaquePrincipal.OrderByDescending(o => o.Id).ToList();
             return View();
         }
 

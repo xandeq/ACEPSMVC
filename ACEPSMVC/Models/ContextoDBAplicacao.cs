@@ -15,5 +15,7 @@ namespace ACEPSMVC.Models
 
         public DbSet<Institucional> Institucional { get; set; }
         public DbSet<Noticias> Noticias { get; set; }
+        public DbSet<DestaquePrincipal> DestaquePrincipal { get; set; }
+        public DbSet<Destaques> Destaque { get; set; }
     }
 }
