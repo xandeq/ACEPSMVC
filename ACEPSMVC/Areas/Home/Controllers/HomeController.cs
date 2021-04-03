@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ACEPSMVC.Models;
+using ACEPSMVC.DataAccess.Data;
 
 namespace ACEPSMVC.Controllers
 {
+    [Area("Home")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

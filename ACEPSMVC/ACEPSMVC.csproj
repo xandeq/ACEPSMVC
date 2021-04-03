@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ContextoDBAplicacao.cs" />
+    <Compile Remove="Models\DestaquePrincipal.cs" />
+    <Compile Remove="Models\Destaques.cs" />
+    <Compile Remove="Models\ErrorViewModel.cs" />
+    <Compile Remove="Models\Institucional.cs" />
+    <Compile Remove="Models\Noticias.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="jquery.datatables" Version="1.10.15" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.13" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.13" />
@@ -25,15 +34,26 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Identity\Controllers\" />
     <Folder Include="Areas\Identity\Data\" />
     <Folder Include="Areas\Identity\Models\" />
     <Folder Include="Areas\Identity\Views\" />
+    <Folder Include="Models\" />
     <Folder Include="noticias\" />
     <Folder Include="wwwroot\noticias\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ACEPSMVC.DataAccess\ACEPSMVC.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\_ViewStart.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
