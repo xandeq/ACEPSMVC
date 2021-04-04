@@ -15,7 +15,7 @@
             <div class="col-3">
                 <label asp-for="Titulo"></label>
             </div>
-            <div class="col-6">
+            <div class="col-9">
                 <input asp-for="Titulo" class="form-control text-danger" />
                 <span asp-validation-for="Titulo" class="text-danger"></span>
             </div>
@@ -24,7 +24,7 @@
             <div class="col-3">
                 <label asp-for="Subtitulo"></label>
             </div>
-            <div class="col-6">
+            <div class="col-9">
                 <input asp-for="Subtitulo" class="form-control text-danger" />
                 <span asp-validation-for="Subtitulo" class="text-danger"></span>
             </div>
@@ -33,7 +33,7 @@
             <div class="col-3">
                 <label asp-for="LinhaFina"></label>
             </div>
-            <div class="col-6">
+            <div class="col-9">
                 <textarea asp-for="LinhaFina" rows="5" class="form-control text-danger"></textarea>
                 <span asp-validation-for="LinhaFina" class="text-danger"></span>
             </div>
@@ -42,7 +42,7 @@
             <div class="col-3">
                 <label asp-for="Texto"></label>
             </div>
-            <div class="col-6">
+            <div class="col-9">
                 <textarea id="summernote" rows="20" cols="20" asp-for="Texto" class="text-danger"></textarea>
                 <span asp-validation-for="Texto" class="text-danger"></span>
             </div>
@@ -51,18 +51,26 @@
             <div class="col-3">
                 <label asp-for="ImagemDestaque"></label>
             </div>
-            <div class="col-6">
+            <div class="col-9">
                 <input type="file" rows="20" cols="20" asp-for="ImagemDestaque" class="text-danger form-control" />
                 <span asp-validation-for="ImagemDestaque" class="text-danger"></span>
+                @if(Model.Id != 0)
+                {
+                    <img src="~/noticias/@Model.ImagemDestaque" style="min-width: 20%;max-width: 300px" />
+                }
             </div>
         </div>
         <div class="form-group row">
             <div class="col-3">
                 <label asp-for="ImagemInterna"></label>
             </div>
-            <div class="col-6">
+            <div class="col-9">
                 <input type="file" rows="20" cols="20" asp-for="ImagemInterna" class="text-danger form-control" />
                 <span asp-validation-for="ImagemInterna" class="text-danger"></span>
+                @if (Model.Id != 0)
+                {
+                    <img src="~/noticias/@Model.ImagemInterna" style="min-width: 20%;max-width: 300px" />
+                }
             </div>
         </div>
         <div class="form-group row">

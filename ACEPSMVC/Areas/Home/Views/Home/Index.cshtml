@@ -1,0 +1,183 @@
+﻿@*@model ACEPSMVC.Models.Noticias*@
+
+@{
+    ViewData["Title"] = "Home Page";
+    IEnumerable<Noticias> listaNoticias = ViewData["Noticias"] as IEnumerable<Noticias>;
+    IEnumerable<DestaquePrincipal> destaquePrincipal = ViewData["DestaquePrincipal"] as IEnumerable<DestaquePrincipal>;
+    IEnumerable<Destaques> listaDestaques = ViewData["Destaques"] as IEnumerable<Destaques>;
+}
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="row blog">
+                    <div class="col-md-12">
+                        <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+
+                            <ol class="carousel-indicators">
+                                <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#blogCarousel" data-slide-to="1"></li>
+                            </ol>
+
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <a href="#">
+                                                <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="#">
+                                                <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="#">
+                                                <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="#">
+                                                <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--.row-->
+                                </div>
+                                <!--.item-->
+
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <a href="#">
+                                                <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="#">
+                                                <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="#">
+                                                <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="#">
+                                                <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--.row-->
+                                </div>
+                                <!--.item-->
+
+                            </div>
+                            <!--.carousel-inner-->
+                        </div>
+                        <!--.Carousel-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                    @foreach (var dprincipal in destaquePrincipal)
+                    {
+                        <img src="~/destaqueprincipal/@dprincipal.Imagem" class="img-fluid" />
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Últimas Notícias</h4>
+                    <div class="table-responsive">
+                        @*<table id="mytable" class="table table-bordred table-striped">
+                                @foreach (var noticia in listaNoticias)
+                                {
+                                    <tr>
+                                        <td>@noticia.DataCriacao</td>
+                                        <td><a asp-action="Detalhes" asp-controller="Noticias" asp-route-id="@noticia.Id"> @noticia.Titulo </a></td>
+                                        <td>@noticia.Subtitulo</td>
+                                        <td><i class="fab fa-arrow-right"></i></td>
+                                    </tr>
+                                }
+                            </table>*@
+                        @foreach (var noticia in listaNoticias)
+                        {
+                            <div class="well">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        @*<img class="media-object" src=" ~/noticias/@noticia.ImagemDestaque">*@
+                                        <img class="media-object" src="~/img/imgnoticia.png" style="width: 20%" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">@noticia.Titulo</h6>
+                                        <p class="text-right">@noticia.Subtitulo</p>
+                                        <p>
+                                            @if (noticia.LinhaFina != null && noticia.LinhaFina.Length >= 100)
+                                            {
+                                                @noticia.LinhaFina.Substring(0, 100)
+                                            }
+                                            else
+                                            {
+                                                @noticia.LinhaFina
+                                            }
+                                        </p>
+                                        <ul class="list-inline list-unstyled">
+                                            <li><span><i class="glyphicon glyphicon-calendar"></i> @noticia.DataCriacao.ToString("dd/MM/YYYY") </span></li>
+                                            <!--<li>|</li>
+                                            <span><i class="glyphicon glyphicon-comment"></i> 2 comments</span>
+                                            <li>|</li>
+                                            <li>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                            </li>
+                                            <li>|</li>
+                                            <li>-->
+                                            <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+                                            <!--<span><i class="fa fa-facebook-square"></i></span>
+                                                <span><i class="fa fa-twitter-square"></i></span>
+                                                <span><i class="fa fa-google-plus-square"></i></span>
+                                            </li>-->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="clearfix"></div>
+                        @*<ul class="pagination pull-right">
+                                <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                            </ul>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>

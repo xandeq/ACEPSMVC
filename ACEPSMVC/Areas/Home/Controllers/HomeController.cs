@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ACEPSMVC.Models;
+using ACEPSMVC.DataAccess.Data;
 
 namespace ACEPSMVC.Controllers
 {
+    [Area("Home")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -22,7 +24,9 @@ namespace ACEPSMVC.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Destaques"] = _db.Destaque.ToList();
             ViewData["Noticias"] = _db.Noticias.Take(10).ToList();
+            ViewData["DestaquePrincipal"] = _db.DestaquePrincipal.OrderByDescending(o => o.Id).ToList();
             return View();
         }
 
