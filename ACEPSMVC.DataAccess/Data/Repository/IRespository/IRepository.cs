@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace ACEPSMVC.DataAccess.Data.Repository.IRespository
+namespace ACEPSMVC.DataAccess.Data.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
