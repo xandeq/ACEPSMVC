@@ -30,8 +30,8 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
-      - name: Run the Publish
-        run: dotnet publish --configuration Release --no-restore --output ./publish  
+      # - name: Run the Publish
+      # run: dotnet publish --configuration Release --no-restore --output ./publish  
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
