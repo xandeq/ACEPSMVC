@@ -1,10 +1,15 @@
-﻿using System;
+﻿using ACEPSMVC.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ACEPSMVC.DataAccess.Data.Repository.IRepository
 {
-    interface ICategoriaRepository
+    public interface ICategoriaRepository : IRepository<Categoria>
     {
+        IEnumerable<SelectList> GetCategoriaListForDropDown();
+
+        void Update(Categoria categoria);
     }
 }

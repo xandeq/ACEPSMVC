@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACEPSMVC.Models
 {
-    class Categoria
+    public class Categoria
     {
         [Key]
         public int Id { get; set; }

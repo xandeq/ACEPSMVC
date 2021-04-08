@@ -18,5 +18,6 @@ namespace ACEPSMVC.DataAccess.Data
         public DbSet<Noticias> Noticias { get; set; }
         public DbSet<DestaquePrincipal> DestaquePrincipal { get; set; }
         public DbSet<Destaques> Destaque { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
     }
 }

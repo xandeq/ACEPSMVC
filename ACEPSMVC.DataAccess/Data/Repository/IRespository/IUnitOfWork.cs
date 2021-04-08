@@ -4,7 +4,9 @@ using System.Text;
 
 namespace ACEPSMVC.DataAccess.Data.Repository.IRepository
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
+        ICategoriaRepository Categoria { get; }
+        void Save();
     }
 }
