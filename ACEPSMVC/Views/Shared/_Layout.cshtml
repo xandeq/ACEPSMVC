@@ -15,7 +15,8 @@
     <link href="~/lib/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" />
 </head>
 <body>
-    <header>''
+    <header>
+        ''
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             @*<div class="row">*@
             <div class="container">
@@ -38,10 +39,10 @@
                             <input type="submit" name="login" class="btn btn-success login loginmodal-submit" value="IR">
                         </form>
 
-                        <div class="login-help">
-                            Acesso Restrito
-                            @*<a href="#">Register</a> - <a href="#">Forgot Password</a>*@
-                        </div>
+                            @*<partial name="_LoginPartial" />*@
+                            <div class="login-help">
+                                Acesso Restrito
+                            </div>
                     </div>
                 </div>
             </div>
@@ -59,6 +60,17 @@
                                 <li class="list-group-item"><a>Fale Conosco</a></li>
                                 <li class="list-group-item"><a>Enquete</a></li>
                                 <li class="list-group-item"><a>Webmail</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Painel Administrativo
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-white" asp-area="Admin" asp-controller="Categoria" asp-action="Index">Categoria</a>
+                                        <a class="dropdown-item text-white" asp-area="Admin" asp-controller="Noticia" asp-action="Index">Categoria</a>
+                                        <a class="dropdown-item text-white" asp-area="Admin" asp-controller="Destaques" asp-action="Index">Categoria</a>
+                                        <a class="dropdown-item text-white" asp-area="Admin" asp-controller="DestaquesPrincipais" asp-action="Index">Categoria</a>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </nav>
