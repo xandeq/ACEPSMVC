@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using ACEPSMVC.DataAccess.Data.Repository;
+using ACEPSMVC.Utility;
 
 namespace ACEPSMVC
 {
@@ -43,11 +45,13 @@ namespace ACEPSMVC
                 .AddEntityFrameworkStores<ContextoDBAplicacao>()
                 .AddDefaultTokenProviders();
 
+            services.AddSingleton<IEmailSender, EmailSender>();
+
             services.AddDbContext<ContextoDBAplicacao>(option => option.UseSqlServer(Configuration.GetConnectionString("ConexaoBancoDeDados")));
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<IDbInitializer, DbInitializer>();
             //services.AddSession(options =>
             //{
@@ -56,9 +60,19 @@ namespace ACEPSMVC
             //    options.Cookie.IsEssential = true;
             //});
 
-            //services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+
+                options.LoginPath = $"/Identity/Account/Login";
+
+                options.LogoutPath = $"/Identity/Account/Logout";
+
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +93,7 @@ namespace ACEPSMVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -86,6 +101,7 @@ namespace ACEPSMVC
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

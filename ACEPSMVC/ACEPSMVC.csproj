@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Noticias\**" />
+    <Content Remove="Areas\Noticias\**" />
+    <EmbeddedResource Remove="Areas\Noticias\**" />
+    <None Remove="Areas\Noticias\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Models\ContextoDBAplicacao.cs" />
     <Compile Remove="Models\DestaquePrincipal.cs" />
     <Compile Remove="Models\Destaques.cs" />
@@ -35,10 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Controllers\" />
-    <Folder Include="Areas\Identity\Data\" />
-    <Folder Include="Areas\Identity\Models\" />
-    <Folder Include="Areas\Identity\Views\" />
     <Folder Include="Areas\Categoria\" />
     <Folder Include="Models\" />
     <Folder Include="noticias\" />

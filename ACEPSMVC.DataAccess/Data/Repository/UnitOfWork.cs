@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACEPSMVC.DataAccess.Data.Repository
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ContextoDBAplicacao _db;
 
