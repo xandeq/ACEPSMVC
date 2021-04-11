@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ACEPSMVC.DataAccess.Data.Repository.IRepository;
+using ACEPSMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ACEPSMVC.Areas.Admin.Controllers
@@ -19,6 +20,23 @@ namespace ACEPSMVC.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Upsert(int? id)
+        {
+            Categoria categoria = new Categoria();
+            if(id == null)
+            {
+                return View(categoria);
+            }
+
+            categoria = _unitOfWork.Categoria.Get(id.GetValueOrDefault());
+            if(categoria == null)
+            {
+                return NotFound();
+            }
+
+            return View(categoria);
         }
 
         #region  API CALLS
