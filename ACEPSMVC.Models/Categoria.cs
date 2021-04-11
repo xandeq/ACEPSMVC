@@ -14,6 +14,7 @@ namespace ACEPSMVC.Models
         [Display(Name="Nome da Categoria")]
         public string Nome { get; set; }
 
+        [Display(Name = "Ordem de Visualização")]
         public int OrdemVisualizacao { get; set; }
     }
 }

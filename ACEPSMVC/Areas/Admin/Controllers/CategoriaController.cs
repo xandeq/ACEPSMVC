@@ -39,6 +39,30 @@ namespace ACEPSMVC.Areas.Admin.Controllers
             return View(categoria);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Categoria categoria)
+        {
+            if (ModelState.IsValid)
+            {
+                if(categoria.Id == 0)
+                {
+                    _unitOfWork.Categoria.Add(categoria);
+                }
+                else
+                {
+                    _unitOfWork.Categoria.Update(categoria);
+                }
+
+                _unitOfWork.Save();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(categoria);
+        }
+
+
         #region  API CALLS
 
         [HttpGet]
