@@ -1,7 +1,15 @@
 ﻿@model ACEPSMVC.Models.Destaques
 
 <br />
-<h2 class="text-info">@(Model.Id!=0 ? "Editar" : "Criar") Notícia</h2>
+<h2 class="text-info">@(Model.Id!=0 ? "Editar" : "Criar") Destaque</h2>
+<br />
+<h4>
+    Caso tenha o campo URL preenchido, ao clicar na imagem, ele será direcionado para uma nova pagina.
+    <br />
+    Caso o conteúdo esteja preenchido, ele irá para uma pagina mostrar o conteudo.
+    <br />
+    Caso os dois estejam preenchidos, irá prevalecer a URL, ou seja, o endereço de redirecionamento
+</h4>
 <br />
 
 <div class="border container" style="padding: 30px">

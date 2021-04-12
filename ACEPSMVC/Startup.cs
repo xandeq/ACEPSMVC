@@ -55,7 +55,7 @@ namespace ACEPSMVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

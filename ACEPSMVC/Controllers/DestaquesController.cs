@@ -56,8 +56,8 @@ namespace ACEPSMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert()
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 string caminho = _webHostEnvironment.WebRootPath + "\\destaques";
 
                 var filePath = Path.GetTempFileName();
@@ -94,8 +94,23 @@ namespace ACEPSMVC.Controllers
                 }
                 _db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            //}
             return View(Destaque);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var objBD = await _db.Destaque.FirstOrDefaultAsync(u => u.Id == id);
+            if (objBD == null)
+            {
+                return Json(new { success = false, message = "Erro ao deletar Destaque." });
+            }
+
+            _db.Destaque.Remove(objBD);
+            await _db.SaveChangesAsync();
+            return Json(new { success = true, message = "Destaque deletada com sucesso." });
+        }
+
     }
 }

@@ -15,8 +15,8 @@ namespace ACEPSMVC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
-        public string Imagem { get; set; }
         [Required]
+        public string Imagem { get; set; }
         public string Conteudo { get; set; }
         public string Url { get; set; }
     }

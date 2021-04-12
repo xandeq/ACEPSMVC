@@ -1,17 +1,39 @@
-﻿@*@model ACEPSMVC.Models.Noticias*@
-
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
     IEnumerable<Noticias> listaNoticias = ViewData["Noticias"] as IEnumerable<Noticias>;
     IEnumerable<DestaquePrincipal> destaquePrincipal = ViewData["DestaquePrincipal"] as IEnumerable<DestaquePrincipal>;
-    IEnumerable<Destaques> listaDestaques = ViewData["Destaques"] as IEnumerable<Destaques>;
+    List<Destaques> listaDestaques = ViewData["Destaques"] as List<Destaques>;
+
+    var aberturaLinha = "<div class='carousel-item'><div class=row>";
+    var fechamentoLinha = "</div></div>";
 }
 
-@*<div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>*@
 
+<div class="carousel-inner">
+    @{
+        for (int i = 0; i < listaDestaques.Count(); i++)
+        {
+            var item = listaDestaques[i];
+            @if (i % 4 == 0)
+            {
+                <input type="text" value="@i.ToString()" />
+                @Html.Raw(aberturaLinha);
+            }
+
+            <div class="col-md-3">
+                <a href="#">
+                    @i.ToString()
+                    <img src="~/destaques/@item" alt="Image" style="max-width:100%;">
+                </a>
+            </div>
+
+            @if (i % 4 == 0 && i != 0)
+            {
+                @Html.Encode(fechamentoLinha);
+            }
+        }
+    }
+</div>
 
 <div class="container">
     <div class="row">
@@ -28,7 +50,6 @@
 
                             <!-- Carousel items -->
                             <div class="carousel-inner">
-
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-md-3">
@@ -55,7 +76,6 @@
                                     <!--.row-->
                                 </div>
                                 <!--.item-->
-
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-md-3">
