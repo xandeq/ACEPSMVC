@@ -79,6 +79,11 @@ body {
     font-size: 0.8em;
 }
 
+.bgverdemenu {
+    background-color: #00A859;
+    color: #ffffff;
+}
+
 /*NAVBAR MENU*/
 .list-group-item {
     margin-right: 10px !important;
@@ -88,4 +93,13 @@ body {
     padding: 0;
     background-color: inherit;
     border: 0;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #ffffff !important;
+}
+
+.header-social {
+    list-style-type: none;
+    text-align: left
 }

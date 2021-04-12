@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-4 col-sm-12 col-xs-12 text-center">
                     <ul class="header-social">
-                        <li><a href="https://www.facebook.com/aceps"><i class="fab fa-phone-alt"></i> (73) 99170-2845</a></li>
+                        <li><a href="https://www.facebook.com/aceps"><i class="fab fa-phone"></i> (73) 99170-2845</a></li>
                         <li><a href="https://www.facebook.com/aceps"><i class="fab fa-facebook"></i> facebook.com/aceportoseguro</a></li>
                         <li><a href="https://www.instagram.com/aceps"><i class="fab fa-instagram"></i> instagram.com/aceportoseguro</a></li>
                     </ul>
@@ -77,7 +77,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto navegacaoinferior">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" asp-action="Index" asp-controller="Home" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Home
@@ -113,15 +113,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">2ª Via Boleto</a>
                         </li>
-                        <li class="nav-item dropdown" style="color: #000000 !important">
-                            <a  style="color: #000000 !important" class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown" >
+                            <a   class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Painel Administrativo
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="color: #000000 !important">
-                                <a style="color: #000000 !important" class="dropdown-item text-white" asp-controller="Institucionals" asp-action="Editar">Institucional</a>
-                                <a style="color: #000000 !important" class="dropdown-item text-white" asp-controller="Noticias" asp-action="Index">Noticia</a>
-                                <a style="color: #000000 !important" class="dropdown-item text-white" asp-controller="Destaques" asp-action="Index">Destaques</a>
-                                <a style="color: #000000 !important" class="dropdown-item text-white" asp-controller="DestaquesPrincipais" asp-action="Index">DestaquesPrincipais</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                <a  class="dropdown-item" asp-controller="Institucionals" asp-action="Editar">Institucional</a>
+                                <a  class="dropdown-item" asp-controller="Noticias" asp-action="Index">Noticia</a>
+                                <a  class="dropdown-item" asp-controller="Destaques" asp-action="Index">Destaques</a>
+                                <a  class="dropdown-item" asp-controller="DestaquesPrincipais" asp-action="Index">DestaquesPrincipais</a>
                             </div>
                         </li>
                         @*<li class="nav-item dropdown">
@@ -154,7 +154,7 @@
         </div>
     </div>
     <div class="container">
-        <main role="main" class="col-9 pb-3">
+        <main role="main" class="col-9 pb-3 py-3">
             @RenderBody()
         </main>
         <div class="col-3">

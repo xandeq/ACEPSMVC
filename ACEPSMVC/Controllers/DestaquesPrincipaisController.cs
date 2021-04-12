@@ -80,35 +80,43 @@ namespace ACEPSMVC.Controllers
                 {
                     if (formFile.Length > 0)
                     {
-                        using (var inputStream = new FileStream(Path.Combine(caminho, formFile.FileName), FileMode.Create))
+                        string caminho2 = Path.Combine(caminho, formFile.FileName);
+                        if (!System.IO.File.Exists(caminho2))
                         {
-                            // read file to stream
-                            formFile.CopyToAsync(inputStream);
+                            using (var inputStream = new FileStream(Path.Combine(caminho, formFile.FileName), FileMode.Create))
+                            {
+                                // read file to stream
+                                formFile.CopyToAsync(inputStream);
 
 
-                            // stream to byte array
-                            byte[] array = new byte[inputStream.Length];
-                            inputStream.Seek(0, SeekOrigin.Begin);
-                            inputStream.Read(array, 0, array.Length);
-                            // get file name
-                            string fName = formFile.FileName;
-                            DestaquePrincipal.Imagem = formFile.FileName;
+                                // stream to byte array
+                                byte[] array = new byte[inputStream.Length];
+                                inputStream.Seek(0, SeekOrigin.Begin);
+                                inputStream.Read(array, 0, array.Length);
+                                // get file name
+                                string fName = formFile.FileName;
+                                DestaquePrincipal.Imagem = formFile.FileName;
+                            }
+
+                            DestaquePrincipal.DataCriacao = DateTime.Now;
+
+                            if (DestaquePrincipal.Id == 0)
+                            {
+                                //create
+                                _db.DestaquePrincipal.Add(DestaquePrincipal);
+                            }
+                            else
+                            {
+                                _db.DestaquePrincipal.Update(DestaquePrincipal);
+                            }
+                            _db.SaveChanges();
                         }
                     }
+                    else
+                    {
+                        ViewData["Erro"] = "Arquivo ja existe. Renomeie.";
+                    }
                 }
-
-                DestaquePrincipal.DataCriacao = DateTime.Now;
-
-                if (DestaquePrincipal.Id == 0)
-                {
-                    //create
-                    _db.DestaquePrincipal.Add(DestaquePrincipal);
-                }
-                else
-                {
-                    _db.DestaquePrincipal.Update(DestaquePrincipal);
-                }
-                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             else

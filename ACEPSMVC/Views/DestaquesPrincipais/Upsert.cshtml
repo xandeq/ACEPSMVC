@@ -1,5 +1,11 @@
 ﻿@model ACEPSMVC.Models.DestaquePrincipal
 
+@{
+    string erro = string.Empty;
+    if (ViewData["ErrorMessage"] != null)
+        erro = ViewData["ErrorMessage"].ToString();
+}
+
 <br />
 <h2 class="text-info">@(Model.Id!=0 ? "Editar" : "Criar") DestaquePrincipal</h2>
 <br />
@@ -11,7 +17,13 @@
             {
                 <input type="hidden" asp-for="Id" />
             }
-            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            @if (!string.IsNullOrWhiteSpace(erro))
+            {
+                <div class="alert alert-danger">
+                    <h1>@erro</h1>
+                </div>
+            }
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
             <br />
             <div class="form-group">
                 <label asp-for="Imagem" class="control-label"></label>

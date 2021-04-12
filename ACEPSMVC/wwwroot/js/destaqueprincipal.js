@@ -18,7 +18,6 @@ function loadDataTable() {
                     return '<img src="../destaqueprincipal/' + data + '" />';
                 }
             },
-            { "data": "url", "width": "20%" },
             { "data": "dataCriacao", "width": "20%" },
             { "data": "ativo", "width": "20%" },
             {
