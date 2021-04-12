@@ -63,12 +63,12 @@
                                     <p>@noticia.DataCriacao.ToString("dd/MM/yyyy")</p>
                                     <p>
                                         @if (noticia.Texto != null && noticia.Texto.Length >= 100)
-                                        {
-                                        @Html.Raw(noticia.Texto.Substring(0, 100));
+                                    {
+                                        @noticia.Texto.Substring(0, 100);
                                     }
                                     else
                                     {
-                                        @Html.Raw(noticia.Texto);
+                                        @Html.Raw(noticia.Texto +  "...");
                                     }
                                     </p>
                                 </div>

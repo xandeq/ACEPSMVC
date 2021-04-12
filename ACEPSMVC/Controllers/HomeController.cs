@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ACEPSMVC.Models;
+using System.Text.RegularExpressions;
 
 namespace ACEPSMVC.Controllers
 {
@@ -23,7 +24,18 @@ namespace ACEPSMVC.Controllers
         public IActionResult Index()
         {
             ViewData["Destaques"] = _db.Destaque.ToList();
-            ViewData["Noticias"] = _db.Noticias.Take(10).ToList();
+            ViewData["Noticias"] = _db.Noticias.Take(10).Select( s => new Noticias
+            {
+                DataCriacao = s.DataCriacao,
+                Id = s.Id,
+                ImagemDestaque = s.ImagemDestaque,
+                ImagemDestaqueArquivo = s.ImagemDestaqueArquivo,
+                ImagemInterna = s.ImagemInterna,
+                LinhaFina = s.LinhaFina,
+                Subtitulo = s.Subtitulo,
+                Texto = Regex.Replace(s.Texto, "<.*?>", String.Empty),
+                Titulo = s.Titulo
+            }).ToList();
             ViewData["DestaquePrincipal"] = _db.DestaquePrincipal.OrderByDescending(o => o.Id).ToList();
             return View();
         }
