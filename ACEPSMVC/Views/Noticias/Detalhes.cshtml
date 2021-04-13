@@ -5,4 +5,7 @@
 <h3>@Model.Subtitulo</h3>
 <h5>@Model.LinhaFina</h5>
 <p>@Html.Raw(Model.Texto)</p>
-<img src="~/noticias/@Model.ImagemInterna" class="img-fluid" />
+
+<a href="https://www.facebook.com/sharer/sharer.php?u=@string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString)&t=@Model.Titulo" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Facebook">
+    Facebook
+</a>

@@ -13,14 +13,18 @@
     <link href="~/lib/fontawesome-free-5.15.2-web/css/fontawesome.css" rel="stylesheet" />
     <link href="~/lib/fontawesome-free-5.15.2-web/css/solid.css" rel="stylesheet" />
     <link href="~/lib/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" />
+    <!-- ShareThis BEGIN -->
 </head>
 <body>
-    <header>''
+    <header>
+        <div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             @*<div class="row">*@
             <div class="container">
                 <div class="col-md-4 col-sm-12 col-xs-12 pt-1">
-                    <img src="~/img/49608185_2192040527728410_7416589895130415104_n.jpg" class="img-fluid" />
+                    <a asp-action="Index" asp-controller="Home">
+                        <img src="~/img/49608185_2192040527728410_7416589895130415104_n.jpg" class="img-fluid" />
+                    </a>
                 </div>
                 <div class="col-md-4 col-sm-12 col-xs-12 text-center">
                     <ul class="header-social">

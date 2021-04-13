@@ -103,3 +103,11 @@ body {
     list-style-type: none;
     text-align: left
 }
+
+.texto-verde-primario {
+    color: #019339;
+}
+
+.bg-verde-primario {
+    background-color: #019339;
+}

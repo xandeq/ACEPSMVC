@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ACEPSMVC.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -83,7 +84,11 @@ namespace ACEPSMVC.Controllers
                 {
                     if (formFile.Length > 0)
                     {
-                        using (var inputStream = new FileStream(Path.Combine(caminho, formFile.FileName), FileMode.Create))
+                        string caminhoArquivo = Path.Combine(caminho, formFile.FileName);
+
+                        caminhoArquivo = GetUniqueFilePath(caminhoArquivo);
+
+                        using (var inputStream = new FileStream(caminhoArquivo, FileMode.Create))
                         {
                             // read file to stream
                             formFile.CopyToAsync(inputStream);
@@ -103,7 +108,7 @@ namespace ACEPSMVC.Controllers
                     }
                 }
 
-                Noticia.DataCriacao = DateTime.Now;
+                var data = Noticia.DataCriacao;
 
                 if (Noticia.Id == 0)
                 {
@@ -121,6 +126,35 @@ namespace ACEPSMVC.Controllers
         }
 
         #endregion
+
+        public static string GetUniqueFilePath(string filePath)
+        {
+            if (System.IO.File.Exists(filePath))
+            {
+                string folderPath = Path.GetDirectoryName(filePath);
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                string fileExtension = Path.GetExtension(filePath);
+                int number = 1;
+
+                Match regex = Regex.Match(fileName, @"^(.+) \((\d+)\)$");
+
+                if (regex.Success)
+                {
+                    fileName = regex.Groups[1].Value;
+                    number = int.Parse(regex.Groups[2].Value);
+                }
+
+                do
+                {
+                    number++;
+                    string newFileName = $"{fileName} ({number}){fileExtension}";
+                    filePath = Path.Combine(folderPath, newFileName);
+                }
+                while (System.IO.File.Exists(filePath));
+            }
+
+            return filePath;
+        }
 
         public IActionResult Index()
         {

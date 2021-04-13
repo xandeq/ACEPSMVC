@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ACEPSMVC.Controllers
@@ -69,7 +70,7 @@ namespace ACEPSMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert()
+        public async Task<IActionResult> Upsert()
         {
             if (ModelState.IsValid)
             {
@@ -80,37 +81,35 @@ namespace ACEPSMVC.Controllers
                 {
                     if (formFile.Length > 0)
                     {
-                        string caminho2 = Path.Combine(caminho, formFile.FileName);
-                        if (!System.IO.File.Exists(caminho2))
+                        string caminhoArquivo = Path.Combine(caminho, formFile.FileName);
+
+                        caminhoArquivo = GetUniqueFilePath(caminhoArquivo);
+
+                        using (var inputStream = new FileStream(caminhoArquivo, FileMode.Create))
                         {
-                            using (var inputStream = new FileStream(Path.Combine(caminho, formFile.FileName), FileMode.Create))
-                            {
-                                // read file to stream
-                                formFile.CopyToAsync(inputStream);
-
-
-                                // stream to byte array
-                                byte[] array = new byte[inputStream.Length];
-                                inputStream.Seek(0, SeekOrigin.Begin);
-                                inputStream.Read(array, 0, array.Length);
-                                // get file name
-                                string fName = formFile.FileName;
-                                DestaquePrincipal.Imagem = formFile.FileName;
-                            }
-
-                            DestaquePrincipal.DataCriacao = DateTime.Now;
-
-                            if (DestaquePrincipal.Id == 0)
-                            {
-                                //create
-                                _db.DestaquePrincipal.Add(DestaquePrincipal);
-                            }
-                            else
-                            {
-                                _db.DestaquePrincipal.Update(DestaquePrincipal);
-                            }
-                            _db.SaveChanges();
+                            // read file to stream
+                            await formFile.CopyToAsync(inputStream);
+                            // stream to byte array
+                            byte[] array = new byte[inputStream.Length];
+                            inputStream.Seek(0, SeekOrigin.Begin);
+                            inputStream.Read(array, 0, array.Length);
+                            // get file name
+                            string fName = formFile.FileName;
+                            DestaquePrincipal.Imagem = formFile.FileName;
                         }
+
+                        DestaquePrincipal.DataCriacao = DateTime.Now;
+
+                        if (DestaquePrincipal.Id == 0)
+                        {
+                            //create
+                            _db.DestaquePrincipal.Add(DestaquePrincipal);
+                        }
+                        else
+                        {
+                            _db.DestaquePrincipal.Update(DestaquePrincipal);
+                        }
+                        _db.SaveChanges();
                     }
                     else
                     {
@@ -127,6 +126,35 @@ namespace ACEPSMVC.Controllers
             }
             return View(DestaquePrincipal);
         }
+        public static string GetUniqueFilePath(string filePath)
+        {
+            if (System.IO.File.Exists(filePath))
+            {
+                string folderPath = Path.GetDirectoryName(filePath);
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                string fileExtension = Path.GetExtension(filePath);
+                int number = 1;
+
+                Match regex = Regex.Match(fileName, @"^(.+) \((\d+)\)$");
+
+                if (regex.Success)
+                {
+                    fileName = regex.Groups[1].Value;
+                    number = int.Parse(regex.Groups[2].Value);
+                }
+
+                do
+                {
+                    number++;
+                    string newFileName = $"{fileName} ({number}){fileExtension}";
+                    filePath = Path.Combine(folderPath, newFileName);
+                }
+                while (System.IO.File.Exists(filePath));
+            }
+
+            return filePath;
+        }
+
 
         // GET: DestaquesPrincipaisController/Edit/5
         public ActionResult Edit(int id)
@@ -153,7 +181,7 @@ namespace ACEPSMVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var destaqueBanco = await _db.DestaquePrincipal.FirstOrDefaultAsync(u => u.Id == id);
-            if(destaqueBanco == null)
+            if (destaqueBanco == null)
             {
                 return Json(new { success = true, message = "Destaque deletado com sucesso." });
             }

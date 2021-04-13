@@ -14,8 +14,15 @@ function loadDataTable() {
         "columns": [
             { "data": "dataCriacao", "width": "20%" },
             { "data": "titulo", "width": "20%" },
-            { "data": "subtitulo", "width": "20%" },
-            { "data": "linhaFina", "width": "20%" },
+            {
+                "data": "imagemDestaque", "width": "20%", "render": function (data) {
+                    return '<img style="width: 30%" src="../noticias/' + data + '" />';
+                }
+            },{
+                "data": "imagemInterna", "width": "20%", "render": function (data) {
+                    return '<img style="width: 30%" src="../noticias/' + data + '" />';
+                }
+            },
             {
                 "data": "id",
                 "render": function (data) {

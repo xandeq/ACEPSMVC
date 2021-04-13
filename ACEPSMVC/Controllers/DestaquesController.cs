@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ACEPSMVC.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -58,44 +59,75 @@ namespace ACEPSMVC.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                string caminho = _webHostEnvironment.WebRootPath + "\\destaques";
+            string caminho = _webHostEnvironment.WebRootPath + "\\destaques";
 
-                var filePath = Path.GetTempFileName();
-                foreach (var formFile in Request.Form.Files)
+            var filePath = Path.GetTempFileName();
+            foreach (var formFile in Request.Form.Files)
+            {
+                if (formFile.Length > 0)
                 {
-                    if (formFile.Length > 0)
+                    string caminhoArquivo = Path.Combine(caminho, formFile.FileName);
+
+                    caminhoArquivo = GetUniqueFilePath(caminhoArquivo);
+                    using (var inputStream = new FileStream(caminhoArquivo, FileMode.Create))
                     {
-                        using (var inputStream = new FileStream(Path.Combine(caminho, formFile.FileName), FileMode.Create))
-                        {
-                            // read file to stream
-                            formFile.CopyToAsync(inputStream);
+                        // read file to stream
+                        formFile.CopyToAsync(inputStream);
 
 
-                            // stream to byte array
-                            byte[] array = new byte[inputStream.Length];
-                            inputStream.Seek(0, SeekOrigin.Begin);
-                            inputStream.Read(array, 0, array.Length);
-                            // get file name
-                            string fName = formFile.FileName;
-                            Destaque.Imagem = formFile.FileName;
-                        }
+                        // stream to byte array
+                        byte[] array = new byte[inputStream.Length];
+                        inputStream.Seek(0, SeekOrigin.Begin);
+                        inputStream.Read(array, 0, array.Length);
+                        // get file name
+                        string fName = formFile.FileName;
+                        Destaque.Imagem = formFile.FileName;
                     }
                 }
+            }
 
-
-                if (Destaque.Id == 0)
-                {
-                    //create
-                    _db.Destaque.Add(Destaque);
-                }
-                else
-                {
-                    _db.Destaque.Update(Destaque);
-                }
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+            if (Destaque.Id == 0)
+            {
+                //create
+                _db.Destaque.Add(Destaque);
+            }
+            else
+            {
+                _db.Destaque.Update(Destaque);
+            }
+            _db.SaveChanges();
+            return RedirectToAction("Index");
             //}
             return View(Destaque);
+        }
+
+        public static string GetUniqueFilePath(string filePath)
+        {
+            if (System.IO.File.Exists(filePath))
+            {
+                string folderPath = Path.GetDirectoryName(filePath);
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                string fileExtension = Path.GetExtension(filePath);
+                int number = 1;
+
+                Match regex = Regex.Match(fileName, @"^(.+) \((\d+)\)$");
+
+                if (regex.Success)
+                {
+                    fileName = regex.Groups[1].Value;
+                    number = int.Parse(regex.Groups[2].Value);
+                }
+
+                do
+                {
+                    number++;
+                    string newFileName = $"{fileName} ({number}){fileExtension}";
+                    filePath = Path.Combine(folderPath, newFileName);
+                }
+                while (System.IO.File.Exists(filePath));
+            }
+
+            return filePath;
         }
 
         [HttpDelete]
@@ -112,5 +144,10 @@ namespace ACEPSMVC.Controllers
             return Json(new { success = true, message = "Destaque deletada com sucesso." });
         }
 
+        public IActionResult Detalhes(int id)
+        {
+            Destaques destaque = _db.Destaque.FirstOrDefault(u => u.Id == id);
+            return View(destaque);
+        }
     }
 }

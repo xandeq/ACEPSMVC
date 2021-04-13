@@ -20,24 +20,24 @@
                 <span asp-validation-for="Titulo" class="text-danger"></span>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="Subtitulo"></label>
+        @*<div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Subtitulo"></label>
+                </div>
+                <div class="col-9">
+                    <input asp-for="Subtitulo" class="form-control text-danger" />
+                    <span asp-validation-for="Subtitulo" class="text-danger"></span>
+                </div>
             </div>
-            <div class="col-9">
-                <input asp-for="Subtitulo" class="form-control text-danger" />
-                <span asp-validation-for="Subtitulo" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="LinhaFina"></label>
-            </div>
-            <div class="col-9">
-                <textarea asp-for="LinhaFina" rows="5" class="form-control text-danger"></textarea>
-                <span asp-validation-for="LinhaFina" class="text-danger"></span>
-            </div>
-        </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="LinhaFina"></label>
+                </div>
+                <div class="col-9">
+                    <textarea asp-for="LinhaFina" rows="5" class="form-control text-danger"></textarea>
+                    <span asp-validation-for="LinhaFina" class="text-danger"></span>
+                </div>
+            </div>*@
         <div class="form-group row">
             <div class="col-3">
                 <label asp-for="Texto"></label>
@@ -54,10 +54,18 @@
             <div class="col-9">
                 <input type="file" rows="20" cols="20" asp-for="ImagemDestaque" class="text-danger form-control" />
                 <span asp-validation-for="ImagemDestaque" class="text-danger"></span>
-                @if(Model.Id != 0)
+                @if (Model.Id != 0)
                 {
                     <img src="~/noticias/@Model.ImagemDestaque" style="min-width: 20%;max-width: 300px" />
                 }
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="DataCriacao">Data da Matéria</label>
+            </div>
+            <div class="col-9">
+                <input type="text" asp-for="DataCriacao" class="text-danger form-control" id="datepicker" value="@DateTime.Now.ToString("yyyy-MM-ddT00:00")" />
             </div>
         </div>
         <div class="form-group row">
@@ -97,7 +105,27 @@
             height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
-            focus: true
+            focus: true,
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph','style']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                /*['view', ['fullscreen', 'codeview', 'help']]*/
+            ],
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker(
+                {
+                    locale: 'pt-br'
+                });
         });
     </script>
 }
