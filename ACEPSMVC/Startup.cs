@@ -26,6 +26,21 @@ namespace ACEPSMVC
         // AddRazorRuntimeCompilation
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+            });
+
+            services.AddDbContext<ContextoDBAplicacao>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("ConexaoBancoDeDados")));
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ContextoDBAplicacao>()
+                .AddDefaultTokenProviders();
+
+            services.AddSingleton<IEmailSender, EmailSender>();
+
             services.AddDbContext<ContextoDBAplicacao>(option => option.UseSqlServer(Configuration.GetConnectionString("ConexaoBancoDeDados")));
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -49,6 +64,7 @@ namespace ACEPSMVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
