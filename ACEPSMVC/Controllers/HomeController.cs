@@ -36,7 +36,7 @@ namespace ACEPSMVC.Controllers
                 Texto = Regex.Replace(s.Texto, "<.*?>", String.Empty),
                 Titulo = s.Titulo
             }).ToList();
-            ViewData["DestaquePrincipal"] = _db.DestaquePrincipal.OrderByDescending(o => o.Id).ToList();
+            ViewData["DestaquePrincipal"] = _db.DestaquePrincipal.OrderBy(o => o.Id).ToList();
             return View();
         }
 
