@@ -117,15 +117,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">2ª Via Boleto</a>
                         </li>
-                        <li class="nav-item dropdown" >
-                            <a   class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Painel Administrativo
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                <a  class="dropdown-item" asp-controller="Institucionals" asp-action="Editar">Institucional</a>
-                                <a  class="dropdown-item" asp-controller="Noticias" asp-action="Index">Noticia</a>
-                                <a  class="dropdown-item" asp-controller="Destaques" asp-action="Index">Destaques</a>
-                                <a  class="dropdown-item" asp-controller="DestaquesPrincipais" asp-action="Index">DestaquesPrincipais</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Institucionals" asp-action="Editar">Institucional</a>
+                                <a class="dropdown-item" asp-controller="Noticias" asp-action="Index">Noticia</a>
+                                <a class="dropdown-item" asp-controller="Destaques" asp-action="Index">Destaques</a>
+                                <a class="dropdown-item" asp-controller="DestaquesPrincipais" asp-action="Index">DestaquesPrincipais</a>
                             </div>
                         </li>
                     </ul>
@@ -139,6 +139,17 @@
         </main>
         <div class="col-3">
             @RenderSection("barradireita", required: false)
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <iframe id="impostometro" src="https://impostometro.com.br/widget/contador/ba" width="728" height="228" scrolling="no" frameborder="0"></iframe>
+            </div>
+            <div class="col-3">
+                <iframe frameborder=”0″ scrolling=”no” height=”192″ width=”424″ allowtransparency=”true” marginwidth=”0″ marginheight=”0″ src=”https://sslindrates.forexprostools.com/index.php?force_lang =1&pairs_ids =166;27;175;172;176;177;168;&header-text-color =%23FFFFFF&curr-name-color =%230059b0&inner-text-color =%23000000&green-text-color =%232A8215&green-background =%23B7F4C2&green-background =%23B7F4C2&red-text-color =%23DC0001&red-background =%23FFE2E2&inner-border-color =%23CBCBCB&border-color =%23cbcbcb&bg1 =%23F6F6F6&bg2 =%23ffffff&open =hide&last_update =hide”></iframe><br /><span style=”font-size: 11px;color: #333333;text-decoration: none;”>Live World Indices are powered by <a href=”https://www.investing.com/” rel=”nofollow” target=”_blank” style=”font-size: 11px;color: #06529D; font-weight: bold;” class=”underline_link”>Investing.com</a></span>
+            </div>
+            <div class="col-3">
+                <iframe frameborder=”0″ scrolling=”no” height=”192″ width=”424″ allowtransparency=”true” marginwidth=”0″ marginheight=”0″ src=”https://sslindrates.forexprostools.com/index.php?force_lang =1&pairs_ids =166;27;175;172;176;177;168;&header-text-color =%23FFFFFF&curr-name-color =%230059b0&inner-text-color =%23000000&green-text-color =%232A8215&green-background =%23B7F4C2&green-background =%23B7F4C2&red-text-color =%23DC0001&red-background =%23FFE2E2&inner-border-color =%23CBCBCB&border-color =%23cbcbcb&bg1 =%23F6F6F6&bg2 =%23ffffff&open =hide&last_update =hide”></iframe><br /><span style=”font-size: 11px;color: #333333;text-decoration: none;”>Live World Indices are powered by <a href=”https://www.investing.com/” rel=”nofollow” target=”_blank” style=”font-size: 11px;color: #06529D; font-weight: bold;” class=”underline_link”>Investing.com</a></span>
+            </div>
         </div>
     </div>
 
