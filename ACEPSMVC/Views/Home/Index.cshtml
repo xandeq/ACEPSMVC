@@ -11,57 +11,56 @@
             <div class="container">
                 <div class="row blog">
                     <div class="col-md-12">
-                        <div id="blogCarousel" class="carousel slide" data-ride="carousel" data-interval="1000" data- data-pause="hover" data-wrap="true" data->
-                            <ol class="carousel-indicators">
-                                <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#blogCarousel" data-slide-to="1"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                @{
-                                    var carouselAbertura = "<div class='carousel-item'><div class=row>";
-                                    var carouselAberturaAtivo = "<div class='carousel-item active'><div class=row>";
-                                    var carouselFechamento = "</div></ div > ";
-                                }
 
-                                @for (int i = 0; i < listaDestaques.Count(); i++)
-                                {
-                                    if (i == 0)
-                                    {
-                                        @Html.Raw(carouselAberturaAtivo)
-                                    }
-                                    else if (i % 4 == 0 && i != 0)
-                                    {
-                                        @Html.Raw(carouselFechamento);
-                                        @Html.Raw(carouselAbertura);
+                        @*<div id="blogCarousel" class="carousel slide" data-ride="carousel" data-interval="1000" data- data-pause="hover" data-wrap="true" data->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#blogCarousel" data-slide-to="1"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    @{
+                                        var carouselAbertura = "<div class='carousel-item'><div class=row>";
+                                        var carouselAberturaAtivo = "<div class='carousel-item active'><div class=row>";
+                                        var carouselFechamento = "</div></ div > ";
                                     }
 
-                                    var item = listaDestaques[i];
-                                    <div class="col-md-3 @i">
-                                        @if (!string.IsNullOrWhiteSpace(@item.Url))
+                                    @for (int i = 0; i < listaDestaques.Count(); i++)
+                                    {
+                                        if (i == 0)
                                         {
-                                            <a href="@item.Url" target="_blank">
-
-                                                <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
-
-                                            </a>
+                                            @Html.Raw(carouselAberturaAtivo)
                                         }
-                                        else
+                                        else if (i % 4 == 0 && i != 0)
                                         {
-                                            <a asp-controller="Destaques" asp-action="Detalhes" asp-route-id="@item.Id">
-                                                <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
-                                            </a>
+                                            @Html.Raw(carouselFechamento);
+                                            @Html.Raw(carouselAbertura);
                                         }
-                                    </div>
 
-                                    if ((i + 1) % 4 == 0)
-                                    {
-                                        @Html.Raw(carouselFechamento);
+                                        var item = listaDestaques[i];
+                                        <div class="col-md-3 @i">
+                                            @if (!string.IsNullOrWhiteSpace(@item.Url))
+                                            {
+                                                <a href="@item.Url" target="_blank">
+
+                                                    <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
+
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Destaques" asp-action="Detalhes" asp-route-id="@item.Id">
+                                                    <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
+                                                </a>
+                                            }
+                                        </div>
+
+                                        if ((i + 1) % 4 == 0)
+                                        {
+                                            @Html.Raw(carouselFechamento);
+                                        }
                                     }
-                                }
-                                @*</div>
-                                    </div>*@
-                            </div>
-                        </div>
+                                </div>
+                            </div>*@
                     </div>
                 </div>
             </div>
@@ -130,3 +129,9 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+}
+
+@section Styles{
+}
