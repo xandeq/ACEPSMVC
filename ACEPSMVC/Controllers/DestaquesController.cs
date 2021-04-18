@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Utilidades;
 
 namespace ACEPSMVC.Controllers
 {
@@ -68,7 +69,7 @@ namespace ACEPSMVC.Controllers
                 {
                     string caminhoArquivo = Path.Combine(caminho, formFile.FileName);
 
-                    caminhoArquivo = GetUniqueFilePath(caminhoArquivo);
+                    caminhoArquivo = Helpers.ObterCaminhoArquivo(caminhoArquivo);
                     using (var inputStream = new FileStream(caminhoArquivo, FileMode.Create))
                     {
                         // read file to stream
