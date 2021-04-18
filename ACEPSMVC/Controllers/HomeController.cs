@@ -37,6 +37,7 @@ namespace ACEPSMVC.Controllers
                 Titulo = s.Titulo
             }).ToList();
             ViewData["DestaquePrincipal"] = _db.DestaquePrincipal.OrderBy(o => o.Id).ToList();
+            ViewData["DestaquesLaterais"] = _db.DestaqueLateral.OrderBy(o => o.Id).ToList();
             return View();
         }
 
