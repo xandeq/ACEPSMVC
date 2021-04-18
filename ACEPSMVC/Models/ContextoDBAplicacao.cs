@@ -17,5 +17,6 @@ namespace ACEPSMVC.Models
         public DbSet<Noticias> Noticias { get; set; }
         public DbSet<DestaquePrincipal> DestaquePrincipal { get; set; }
         public DbSet<Destaques> Destaque { get; set; }
+        public DbSet<DestaquesLaterais> DestaqueLateral { get; set; }
     }
 }
