@@ -1,0 +1,26 @@
+﻿<div class="container row p-0 m-0">
+    <div class="col-6">
+        <h2 class="text-info">Lista de Destaques Laterais</h2>
+    </div>
+    <div class="col-3 offset-3">
+        <a asp-action="Upsert" asp-controller="Destaques" class="btn btn-info form-control text-white">
+            Adicionar Destaque lateral
+        </a>
+    </div>
+    <div class="col-12 border p-3">
+        <table id="DT_load" class="table table-striped table-bordered" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Imagem</th>
+                    <th>Conteudo</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/destaqueslaterais.js"></script>
+}

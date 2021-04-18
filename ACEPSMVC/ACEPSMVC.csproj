@@ -40,6 +40,7 @@
     <Folder Include="Areas\Identity\Models\" />
     <Folder Include="Areas\Identity\Views\" />
     <Folder Include="noticias\" />
+    <Folder Include="wwwroot\destaqueslaterais\" />
     <Folder Include="wwwroot\noticias\" />
   </ItemGroup>
 
