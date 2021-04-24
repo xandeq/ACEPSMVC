@@ -1,0 +1,22 @@
+﻿@model ACEPSMVC.Models.FormularioDeContato
+
+<h3>Formulário de Contato</h3>
+<form asp-action="Index" asp-controller="Contato" method="post">
+    <div class="form-group">
+        <label asp-for="Nome">Digite seu nome:</label>
+        <input class="form-control" type="text" asp-for="Nome" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Digite seu e-mail:</label>
+        <input class="form-control" type="text" asp-for="Email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Assunto">Selecione o Assunto:</label>
+        <select class="form-control" asp-for="Assunto"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mensagem">Digite sua mensagem:</label>
+        <textarea class="form-control" asp-for="Mensagem"></textarea>
+    </div>
+    <input class="btn btn-success" type="submit" value="Enviar!" />
+</form> 
