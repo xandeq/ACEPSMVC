@@ -10,8 +10,8 @@ namespace ACEPSMVC.classes
         public enum TiposContato
         {
             Contato = 0,
-            Reclamacao = 1,
-            Sugestao = 2,
+            Reclamação = 1,
+            Sugestão = 2,
             Elogio = 3,
         }
     }
