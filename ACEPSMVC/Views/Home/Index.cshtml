@@ -1,9 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     List<Noticias> listaNoticias = ViewData["Noticias"] as List<Noticias>;
-    List<DestaquePrincipal> destaquePrincipal = ViewData["DestaquePrincipal"] as List<DestaquePrincipal>;
-    List<Destaques> listaDestaques = ViewData["Destaques"] as List<Destaques>;
+    //List<DestaquePrincipal> destaquePrincipal = ViewData["DestaquePrincipal"] as List<DestaquePrincipal>;
+    //List<Destaques> listaDestaques = ViewData["Destaques"] as List<Destaques>;
     List<DestaquesLaterais> listaDestaquesLaterais = ViewData["DestaquesLaterais"] as List<DestaquesLaterais>;
+    List<DestaquesUnidos> listaDestaquesUnidos = ViewData["Destaques"] as List<DestaquesUnidos>;
 }
 
 <div class="container">
@@ -24,20 +25,20 @@
                                     var carouselFechamento = "</div></ div > ";
                                 }
 
-                                @for (int i = 0; i < listaDestaques.Count(); i++)
+                                @for (int i = 0; i < listaDestaquesUnidos.Count(); i++)
                                 {
                                     if (i == 0)
                                     {
                                         @Html.Raw(carouselAberturaAtivo)
                                     }
-                                    else if (i % 4 == 0 && i != 0)
+                                    else if (i % 2 == 0 && i != 0)
                                     {
                                         @Html.Raw(carouselFechamento);
                                         @Html.Raw(carouselAbertura);
                                     }
 
-                                    var item = listaDestaques[i];
-                                    <div class="col-md-3 @i">
+                                    var item = listaDestaquesUnidos[i];
+                                    <div class="col-md-6 @i">
                                         @if (!string.IsNullOrWhiteSpace(@item.Url))
                                         {
                                             <a href="@item.Url" target="_blank">
@@ -54,7 +55,7 @@
                                         }
                                     </div>
 
-                                    if ((i + 1) % 4 == 0)
+                                    if ((i + 1) % 2 == 0)
                                     {
                                         @Html.Raw(carouselFechamento);
                                     }
@@ -68,7 +69,7 @@
     </div>
     <div class="row mt-3">
         <div class="col-md-10">
-            <div class="row">
+            @*<div class="row">
                 <div class="col-md-12">
                     <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
                         <div class="carousel-inner">
@@ -90,7 +91,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="row my-3">
                 <div class="col-md-12">
                     <h4 class="bg-verde-primario text-white py-1 px-1"><i class="fa fa-newspaper"></i> Notícias</h4>

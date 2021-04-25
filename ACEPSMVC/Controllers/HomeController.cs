@@ -23,7 +23,7 @@ namespace ACEPSMVC.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Destaques"] = _db.Destaque.ToList();
+            //ViewData["Destaques"] = _db.Destaque.ToList();
             ViewData["Noticias"] = _db.Noticias.Take(10).Select( s => new Noticias
             {
                 DataCriacao = s.DataCriacao,
@@ -36,7 +36,26 @@ namespace ACEPSMVC.Controllers
                 Texto = Regex.Replace(s.Texto, "<.*?>", String.Empty),
                 Titulo = s.Titulo
             }).ToList();
-            ViewData["DestaquePrincipal"] = _db.DestaquePrincipal.OrderBy(o => o.Id).ToList();
+            List<DestaquesUnidos> listaDestaques = _db.Destaque.Select(s => new DestaquesUnidos
+            {
+                Id = s.Id,
+                Imagem = s.Imagem,
+                Conteudo = s.Conteudo,
+                DataCriacao = DateTime.Today,
+                Ativo = true,
+                Url = s.Url
+            }).ToList();
+            List<DestaquesUnidos> listaDestaquesPrincipais = _db.DestaquePrincipal.Select(s => new DestaquesUnidos
+            {
+                Id = s.Id,
+                Imagem = s.Imagem,
+                Conteudo = s.Conteudo,
+                DataCriacao = DateTime.Today,
+                Ativo = true,
+                Url = string.Empty
+            }).ToList();
+            ViewData["Destaques"] = listaDestaques.Concat(listaDestaquesPrincipais);
+            //ViewData["DestaquePrincipal"] = _db.DestaquePrincipal.OrderBy(o => o.Id).ToList();
             ViewData["DestaquesLaterais"] = _db.DestaqueLateral.OrderBy(o => o.Id).ToList();
             return View();
         }
