@@ -125,26 +125,37 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div class="row">
-                @for (int i = 0; i < listaDestaquesLaterais.Count(); i++)
-                {
-                    var item = listaDestaquesLaterais[i];
-                    <div class="col-12 py-3">
-                        @if (!string.IsNullOrWhiteSpace(@item.Url))
-                        {
-                            <a href="@item.Url" target="_blank">
-                                <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
-                            </a>
-                        }
-                        else
-                        {
-                            <a asp-controller="Destaques" asp-action="Detalhes" asp-route-id="@item.Id">
-                                <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
-                            </a>
-                        }
-                    </div>
-                }
+            <div class="row destaqueslaterais">
+                <div class="col-12 py-3 destaquelateral">
+                    <a asp-controller="Contato" asp-action="Index" asp-route-tipo="1">Reclame Aqui</a>
+                </div>
+                <div class="col-12 py-3 destaquelateral">
+                    <a asp-controller="Contato" asp-action="Index" asp-route-tipo="2">Sugestão</a>
+                </div>
+                <div class="col-12 py-3 destaquelateral">
+                    <a asp-controller="Contato" asp-action="Index" asp-route-tipo="3">Elogie</a>
+                </div>
             </div>
+            @*<div class="row">
+                    @for (int i = 0; i < listaDestaquesLaterais.Count(); i++)
+                    {
+                        var item = listaDestaquesLaterais[i];
+                        <div class="col-12 py-3">
+                            @if (!string.IsNullOrWhiteSpace(@item.Url))
+                            {
+                                <a href="@item.Url" target="_blank">
+                                    <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Destaques" asp-action="Detalhes" asp-route-id="@item.Id">
+                                    <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>*@
         </div>
     </div>
 </div>
