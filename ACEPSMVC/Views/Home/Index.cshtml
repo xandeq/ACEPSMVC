@@ -43,14 +43,14 @@
                                         {
                                             <a href="@item.Url" target="_blank">
 
-                                                <img class="img-destaques" src="~/destaques/@item.Imagem" alt="Image" style="">
+                                                <img class="img-destaques" src="~/destaques/@item.Imagem" alt="Image" />
 
                                             </a>
                                         }
                                         else
                                         {
                                             <a asp-controller="Destaques" asp-action="Detalhes" asp-route-id="@item.Id">
-                                                <img src="~/destaques/@item.Imagem" alt="Image" style="max-width:100%;">
+                                                <img class="img-destaques" src="~/destaques/@item.Imagem" alt="Image" />
                                             </a>
                                         }
                                     </div>
