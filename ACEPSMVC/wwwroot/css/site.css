@@ -120,3 +120,11 @@ body {
     background-color: #00A859;
     color: #fff;
 }
+
+.img-destaques {
+    height: 200px;
+}
+
+.links-topo {
+    color: #000000 !important;
+}
