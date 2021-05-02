@@ -125,7 +125,7 @@ body {
     height: 200px !important;
 }
 
-.links-topo {
+.links-topo, .links-topo a {
     color: #000000 !important;
 }
 
