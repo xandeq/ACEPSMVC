@@ -4,14 +4,16 @@ using ACEPSMVC.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ACEPSMVC.Migrations
 {
     [DbContext(typeof(ContextoDBAplicacao))]
-    partial class ContextoDBAplicacaoModelSnapshot : ModelSnapshot
+    [Migration("20210604195957_CreateTableUtilidadePublica")]
+    partial class CreateTableUtilidadePublica
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
