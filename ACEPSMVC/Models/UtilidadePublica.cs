@@ -15,7 +15,7 @@ namespace ACEPSMVC.Models
         [MaxLength(250, ErrorMessage = "Este campo deve conter entre 3 e 250 caracteres")]
         [MinLength(3, ErrorMessage = "Este campo deve conter entre 3 e 250 caracteres")]
         public string Nome { get; set; }
-
+        
         
         [MaxLength(250, ErrorMessage = "Este campo deve conter entre 7 e 250 caracteres")]
         [MinLength(7, ErrorMessage = "Este campo deve conter entre 7 e 250 caracteres")]

@@ -31,14 +31,14 @@
                                     {
                                         @Html.Raw(carouselAberturaAtivo)
                                     }
-                                    else if (i % 2 == 0 && i != 0)
+                                    else if (i % 1 == 0 && i != 0)
                                     {
                                         @Html.Raw(carouselFechamento);
                                         @Html.Raw(carouselAbertura);
                                     }
 
                                     var item = listaDestaquesUnidos[i];
-                                    <div class="col-md-6 @i">
+                                    <div class="col-md-12 @i">
                                         @if (!string.IsNullOrWhiteSpace(@item.Url))
                                         {
                                             <a href="@item.Url" target="_blank">
@@ -55,7 +55,7 @@
                                         }
                                     </div>
 
-                                    if ((i + 1) % 2 == 0)
+                                    if ((i + 1) % 1 == 0)
                                     {
                                         @Html.Raw(carouselFechamento);
                                     }
