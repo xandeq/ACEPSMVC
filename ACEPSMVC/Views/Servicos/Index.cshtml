@@ -1,0 +1,29 @@
+﻿@model ACEPSMVC.Models.Servicos
+
+<div class="container row p-0 m-0">
+    <div class="col-6">
+        <h2 class="text-info">Lista de Serviços</h2>
+    </div>
+    <div class="col-3 offset-3">
+        <a asp-action="Upsert" asp-controller="Servicos" class="btn btn-info form-control text-white">
+            Adicionar Serviço
+        </a>
+    </div>
+    <div class="col-12 border p-3">
+        <table id="DT_load" class="table table-striped table-bordered" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Logo</th>
+                    <th>Website</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/servicos.js"></script>
+}
