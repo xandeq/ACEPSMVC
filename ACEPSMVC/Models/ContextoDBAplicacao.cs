@@ -18,7 +18,7 @@ namespace ACEPSMVC.Models
         public DbSet<DestaquePrincipal> DestaquePrincipal { get; set; }
         public DbSet<Destaques> Destaque { get; set; }
         public DbSet<DestaquesLaterais> DestaqueLateral { get; set; }
-
         public DbSet<UtilidadePublica> UtilidadePublica { get; set; }
+        public DbSet<Servicos> Servicos { get; set; }
     }
 }
