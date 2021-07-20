@@ -12,10 +12,10 @@
                 <img class="img-destaques" src="~/servicos/@item.Logo" alt="Image" />
             </div>
             <h5>@item.Nome</h5>
-            <h4>@item.Observacao</h4>
+            <h4>@Html.Raw(item.Observacao)</h4>
             <p>@item.Endereco</p>
-            <span>@item.Email</span>
-            <span>@item.Website</span>
+            <p>@item.Email</p>
+            <p>@item.Website</p>
         </div>
     </div>
 }

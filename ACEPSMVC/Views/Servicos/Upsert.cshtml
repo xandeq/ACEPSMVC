@@ -42,10 +42,8 @@
             <div class="col-6">
                 <input type="file" rows="20" cols="20" asp-for="Logo" class="text-danger form-control" />
                 <span asp-validation-for="Logo" class="text-danger"></span>
-                @if (Model.Id != 0)
-                {
-                    <img src="~/servicos/@Model.Logo" style="min-width: 20%; max-width: 300px" />
-                }
+                <input type="hidden" asp-for="Logo" />
+                <img src="~/servicos/@Model.Logo" style="min-width: 20%; max-width: 300px" />
             </div>
         </div>
         <div class="form-group row">
