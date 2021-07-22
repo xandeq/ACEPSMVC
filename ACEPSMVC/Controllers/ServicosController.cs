@@ -69,6 +69,12 @@ namespace ACEPSMVC.Controllers
             //{
             try
             {
+                ACEPSMVC.Models.Servicos servicoDB = null;
+                if (Servicos.Id !=null && Servicos.Id > 0)
+                {
+                    servicoDB = _db.Servicos.Where(o => o.Id == Servicos.Id).First();
+                }
+
                 string caminho = _webHostEnvironment.WebRootPath + "\\servicos";
 
                 var filePath = Path.GetTempFileName();
@@ -95,15 +101,18 @@ namespace ACEPSMVC.Controllers
                         }
                     }
                 }
-                Servicos.DataCriacao = DateTime.Now.ToString();
 
                 if (Servicos.Id == 0)
                 {
-                    //create
+                    Servicos.DataCriacao = DateTime.Now.ToString();
                     _db.Servicos.Add(Servicos);
                 }
                 else
                 {
+                    if(!string.IsNullOrWhiteSpace(servicoDB.Logo))
+                    {
+                        Servicos.Logo = servicoDB.Logo;
+                    }
                     _db.Servicos.Update(Servicos);
                 }
                 _db.SaveChanges();
