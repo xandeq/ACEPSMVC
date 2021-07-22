@@ -29,6 +29,5 @@ namespace ACEPSMVC.Models
         public string Observacao { get; set; }
         [Required]
         public string DataCriacao { get; set; }
-        public IFormFile MinhaImagem { get; set; }
     }
 }
