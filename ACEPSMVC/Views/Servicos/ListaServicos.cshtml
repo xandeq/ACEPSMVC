@@ -6,16 +6,18 @@
 
 @foreach (var item in Model)
 {
-    <div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
-        <div class="info-block block-info clearfix">
-            <div class="square-box pull-left">
-                <img class="img-destaques" src="~/servicos/@item.Logo" alt="Image" />
+    
+        <div class="row clearfix">
+            <div class="col">
+                <img class="img-destaques img-thumbnail" src="~/servicos/@item.Logo" alt="Image" />
             </div>
-            <h5>@item.Nome</h5>
-            <h4>@Html.Raw(item.Observacao)</h4>
-            <p>@item.Endereco</p>
-            <p>@item.Email</p>
-            <p>@item.Website</p>
+            <div class="col">
+                <h5>@item.Nome</h5>
+                <h4>@Html.Raw(item.Observacao)</h4>
+                <p>@item.Endereco</p>
+                <p>@item.Email</p>
+                <p><a href="@item.Website">@item.Website</a></p>
+            </div>
         </div>
-    </div>
+    
 }
