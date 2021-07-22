@@ -69,10 +69,10 @@ namespace ACEPSMVC.Controllers
             //{
             try
             {
-                ACEPSMVC.Models.Servicos servicoDB = null;
+                string servicoDB = string.Empty;
                 if (Servicos.Id !=null && Servicos.Id > 0)
                 {
-                    servicoDB = _db.Servicos.Where(o => o.Id == Servicos.Id).First();
+                    servicoDB = _db.Servicos.Where(o => o.Id == Servicos.Id).Select(s => s.Logo).First();
                 }
 
                 string caminho = _webHostEnvironment.WebRootPath + "\\servicos";
@@ -102,16 +102,16 @@ namespace ACEPSMVC.Controllers
                     }
                 }
 
+                Servicos.DataCriacao = DateTime.Now.ToString();
                 if (Servicos.Id == 0)
                 {
-                    Servicos.DataCriacao = DateTime.Now.ToString();
                     _db.Servicos.Add(Servicos);
                 }
                 else
                 {
-                    if(!string.IsNullOrWhiteSpace(servicoDB.Logo))
+                    if(string.IsNullOrWhiteSpace(Servicos.Logo) && !string.IsNullOrWhiteSpace(servicoDB))
                     {
-                        Servicos.Logo = servicoDB.Logo;
+                        Servicos.Logo = servicoDB;
                     }
                     _db.Servicos.Update(Servicos);
                 }
