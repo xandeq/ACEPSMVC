@@ -83,6 +83,11 @@ namespace ACEPSMVC.Controllers
                     if (formFile.Length > 0)
                     {
                         string caminhoArquivo = Path.Combine(caminho, formFile.FileName);
+                        // DELETA O ARQUIVO ANTERIOR COM MESMO NOME
+                        if (System.IO.File.Exists(caminhoArquivo))
+                        {
+                            System.IO.File.Delete(caminhoArquivo);
+                        }
 
                         caminhoArquivo = Helpers.ObterCaminhoArquivo(caminhoArquivo);
                         using (var inputStream = new FileStream(caminhoArquivo, FileMode.Create))
