@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ACEPSMVC.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,13 @@ namespace ACEPSMVC
             services.AddDbContext<ContextoDBAplicacao>(option => option.UseSqlServer(Configuration.GetConnectionString("ConexaoBancoDeDados")));
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+        options =>
+        {
+            options.LoginPath = new PathString("/Usuarios/Login");
+            options.AccessDeniedPath = new PathString("/Usuarios/Logout");
+        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +58,7 @@ namespace ACEPSMVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
