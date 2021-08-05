@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Identity;
 using ACEPSMVC.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace ACEPSMVC.Controllers
 {
@@ -19,7 +22,7 @@ namespace ACEPSMVC.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         [BindProperty]
-        public Usuarios Usuarios { get; set; }
+        public Usuarios Usuario { get; set; }
 
         public LoginController(ContextoDBAplicacao db, IWebHostEnvironment webHostEnvironment)
         {
@@ -45,19 +48,73 @@ namespace ACEPSMVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(Usuarios login)
         {
-            if (ModelState.IsValid)
+            var user = _db.Usuarios.Where(c => c.NomeUsuario == login.NomeUsuario && c.Senha == login.Senha).FirstOrDefault();
+
+            if (!(user is null))
             {
-                //Usuarios appUser = await userManager.FindByEmailAsync(login.Email);
-                //if (appUser != null)
-                //{
-                //    await signInManager.SignOutAsync();
-                //    Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(appUser, login.Senha, false, false);
-                //    if (result.Succeeded)
-                //        return Redirect(login.ReturnUrl ?? "/");
-                //}
-                //ModelState.AddModelError(nameof(login.Email), "Login Failed: Invalid Email or password");
+                var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name,user.NomeUsuario),
+                new Claim("FullName", user.Nome),
+                new Claim(ClaimTypes.Role, "Administrator"),
+            };
+
+                var claimsIdentity = new ClaimsIdentity(
+                    claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var authProperties = new AuthenticationProperties
+                {
+                    RedirectUri = "/Admin/Index",
+                };
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
             }
-            return View(login);
+
+            return Redirect("/Accout/Error");
+        }
+
+        [AllowAnonymous]
+        public IActionResult Upsert(int? id)
+        {
+            Usuario = new Usuarios();
+            if (id == null)
+            {
+                //create
+                return View(Usuario);
+            }
+            //update
+            Usuario = _db.Usuarios.FirstOrDefault(u => u.Id == id);
+            if (Usuario == null)
+            {
+                return NotFound();
+            }
+            return View(Usuario);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public IActionResult Upsert(Usuarios usuario)
+        {
+            //if (ModelState.IsValid)
+            //{
+            if (Usuario.Id == 0)
+            {
+                //create
+                _db.Usuarios.Add(Usuario);
+            }
+            else
+            {
+                _db.Usuarios.Update(Usuario);
+            }
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+            //}
+            return View(Usuario);
         }
     }
+
 }

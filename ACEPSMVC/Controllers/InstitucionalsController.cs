@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ACEPSMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ACEPSMVC.Controllers
 {
+    [Authorize]
     public class InstitucionalsController : Controller
     {
         private readonly ContextoDBAplicacao _context;

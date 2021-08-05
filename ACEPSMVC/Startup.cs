@@ -35,8 +35,9 @@ namespace ACEPSMVC
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
         options =>
         {
-            options.LoginPath = new PathString("/Usuarios/Login");
-            options.AccessDeniedPath = new PathString("/Usuarios/Logout");
+            options.LoginPath = new PathString("/Login/Index");
+            options.LogoutPath = new PathString("/Login/Logout");
+            options.AccessDeniedPath = new PathString("/Login/Logout");
         });
         }
 
