@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ACEPSMVC.Models
 {
-    public class Institucional
+    public class Institucional : IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -16,5 +16,7 @@ namespace ACEPSMVC.Models
         public string Texto { get; set; }
         [Required]
         public DateTime UltimaAlteracao { get; set; }
+        public DateTime DataCriacao { get; set; }
+        public bool Ativo { get; set; }
     }
 }

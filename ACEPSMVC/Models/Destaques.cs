@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace ACEPSMVC.Models
 {
-    public class Destaques
+    public class Destaques : IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -19,5 +19,7 @@ namespace ACEPSMVC.Models
         public string Imagem { get; set; }
         public string Conteudo { get; set; }
         public string Url { get; set; }
+        public DateTime DataCriacao { get; set; }
+        public bool Ativo { get; set; }
     }
 }

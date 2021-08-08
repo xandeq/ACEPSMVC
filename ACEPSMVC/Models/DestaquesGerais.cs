@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ACEPSMVC.Models
 {
-    public  class DestaquesUnidos
+    public  class DestaquesUnidos : IEntity
     {
         public int Id { get; set; }
         public string Imagem { get; set; }

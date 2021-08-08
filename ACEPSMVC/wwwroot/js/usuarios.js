@@ -13,7 +13,7 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "dataCriacao", "width": "20%" },
-            { "nomeUsuario": "titulo", "width": "20%" },
+            { "nomeUsuario": "nomeUsuario", "width": "20%" },
             { "email": "email", "width": "20%" },
             {
                 "data": "id",

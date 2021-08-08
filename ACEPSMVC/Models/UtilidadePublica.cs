@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ACEPSMVC.Models
 {
-    public class UtilidadePublica
+    public class UtilidadePublica : IEntity
     {
         [Key]
         public int Id { get; set; }
@@ -32,5 +32,7 @@ namespace ACEPSMVC.Models
 
         [Required]
         public string DataCriacao { get; set; }
+        public bool Ativo { get; set; }
+        DateTime IEntity.DataCriacao { get; set; }
     }
 }

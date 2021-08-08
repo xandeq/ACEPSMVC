@@ -21,5 +21,6 @@ namespace ACEPSMVC.Controllers
             //TO DO
             return View();
         }
+        //DestaqueLateral.DataCriacao = DateTime.Now;
     }
 }

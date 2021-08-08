@@ -111,7 +111,7 @@ namespace ACEPSMVC.Controllers
                     }
                 }
 
-                var data = Noticia.DataCriacao;
+                Noticia.DataCriacao = DateTime.Now;
 
                 if (Noticia.Id == 0)
                 {

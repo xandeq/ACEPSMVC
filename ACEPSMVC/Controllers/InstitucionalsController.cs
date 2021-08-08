@@ -61,7 +61,7 @@ namespace ACEPSMVC.Controllers
             {
                 _context.Add(institucional);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit));
             }
             return View(institucional);
         }
@@ -112,7 +112,7 @@ namespace ACEPSMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit));
             }
             return View(institucional);
         }

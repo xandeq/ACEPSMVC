@@ -13,7 +13,7 @@
     <link href="~/lib/fontawesome-free-5.15.2-web/css/fontawesome.css" rel="stylesheet" />
     <link href="~/lib/fontawesome-free-5.15.2-web/css/solid.css" rel="stylesheet" />
     <link href="~/lib/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" />
-    @RenderSection("Styles", required:false)
+    @RenderSection("Styles", required: false)
     <!-- ShareThis BEGIN -->
 </head>
 <body>
@@ -118,20 +118,29 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">2ª Via Boleto</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Painel Administrativo
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Institucionals" asp-action="Editar">Institucional</a>
-                                <a class="dropdown-item" asp-controller="Noticias" asp-action="Index">Noticia</a>
-                                <a class="dropdown-item" asp-controller="Destaques" asp-action="Index">Destaques</a>
-                                <a class="dropdown-item" asp-controller="DestaquesPrincipais" asp-action="Index">Destaques Principais</a>
-                                <a class="dropdown-item" asp-controller="DestaquesLaterais" asp-action="Index">Destaques Laterais</a>
-                                <a class="dropdown-item" asp-controller="Servicos" asp-action="Index">Serviços</a>
-                                <a class="dropdown-item" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                            </div>
-                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a class="dropdown-item" asp-controller="Usuarios" asp-action="Login">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Painel Administrativo
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Institucionals" asp-action="Edit">Institucional</a>
+                                    <a class="dropdown-item" asp-controller="Noticias" asp-action="Index">Noticia</a>
+                                    <a class="dropdown-item" asp-controller="Destaques" asp-action="Index">Destaques</a>
+                                    <a class="dropdown-item" asp-controller="DestaquesPrincipais" asp-action="Index">Destaques Principais</a>
+                                    <a class="dropdown-item" asp-controller="DestaquesLaterais" asp-action="Index">Destaques Laterais</a>
+                                    <a class="dropdown-item" asp-controller="Servicos" asp-action="Index">Serviços</a>
+                                    <a class="dropdown-item" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>

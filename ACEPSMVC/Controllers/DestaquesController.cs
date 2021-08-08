@@ -88,7 +88,7 @@ namespace ACEPSMVC.Controllers
                     }
                 }
             }
-
+            Destaque.DataCriacao = DateTime.Now;
             if (Destaque.Id == 0)
             {
                 //create

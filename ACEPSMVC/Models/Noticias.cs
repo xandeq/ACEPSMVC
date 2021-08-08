@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ACEPSMVC.Models
 {
-    public class Noticias
+    public class Noticias : IEntity
     {
         [Key]
         public int Id { get; set; }
@@ -25,5 +25,6 @@ namespace ACEPSMVC.Models
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataCriacao { get; set; }
+        public bool Ativo { get; set; }
     }
 }

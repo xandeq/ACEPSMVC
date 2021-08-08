@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ACEPSMVC.Models
 {
-    public class DestaquePrincipal : IEntity
+    public interface IEntity
     {
         [Key]
         public int Id { get; set; }
-        public string Imagem { get; set; }
-        public string Conteudo { get; set; }
+        [Required]
         public DateTime DataCriacao { get; set; }
         public Boolean Ativo { get; set; }
     }

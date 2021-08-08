@@ -142,17 +142,17 @@ namespace ACEPSMVC.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                if (Usuario.Id == 0)
-                {
-                    //create
-                    _db.Usuarios.Add(Usuario);
-                }
-                else
-                {
-                    _db.Usuarios.Update(Usuario);
-                }
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+            if (Usuario.Id == 0)
+            {
+                Usuario.DataCriacao = DateTime.Now;
+                _db.Usuarios.Add(Usuario);
+            }
+            else
+            {
+                _db.Usuarios.Update(Usuario);
+            }
+            _db.SaveChanges();
+            return RedirectToAction("Index");
             //}
             return View(Usuario);
         }
