@@ -23,7 +23,7 @@ namespace ACEPSMVC.Controllers
         // GET: Institucionals
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Institucional.ToListAsync());
+            return View(await _context.Institucional.FirstOrDefaultAsync());
         }
 
         // GET: Institucionals/Details/5
@@ -67,17 +67,12 @@ namespace ACEPSMVC.Controllers
         }
 
         // GET: Institucionals/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var institucional = await _context.Institucional.FindAsync(id);
+            var institucional = await _context.Institucional.FirstOrDefaultAsync();
             if (institucional == null)
             {
-                return NotFound();
+                institucional = new Institucional();
             }
             return View(institucional);
         }
@@ -87,33 +82,39 @@ namespace ACEPSMVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Texto,UltimaAlteracao")] Institucional institucional)
+        public async Task<IActionResult> Edit(Institucional institucional)
         {
-            if (id != institucional.Id)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+
+            //if (ModelState.IsValid)
+            //{
+            try
             {
-                try
+                if (institucional.Id == 0 || institucional.Id == null)
                 {
-                    _context.Update(institucional);
-                    await _context.SaveChangesAsync();
+                    institucional = new Institucional();
+                    institucional.DataCriacao = DateTime.Now;
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!InstitucionalExists(institucional.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    institucional.UltimaAlteracao = DateTime.Now;
                 }
-                return RedirectToAction(nameof(Edit));
+                _context.Update(institucional);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!InstitucionalExists(institucional.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Edit));
+            //}
             return View(institucional);
         }
 
