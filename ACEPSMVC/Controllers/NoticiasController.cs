@@ -59,13 +59,11 @@ namespace ACEPSMVC.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            Noticia = new Noticias();
             if (id == null)
             {
-                //create
+                Noticia = new Noticias();
                 return View(Noticia);
             }
-            //update
             Noticia = _db.Noticias.FirstOrDefault(u => u.Id == id);
             if (Noticia == null)
             {
@@ -78,6 +76,12 @@ namespace ACEPSMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert()
         {
+            Noticias noticiaDB = new Noticias();
+            if (Noticia.Id != null && Noticia.Id > 0)
+            {
+                noticiaDB = _db.Noticias.Where(o => o.Id == Noticia.Id).AsNoTracking().First();
+            }
+
             if (ModelState.IsValid)
             {
                 string caminho = _webHostEnvironment.WebRootPath + "\\noticias";
@@ -110,16 +114,24 @@ namespace ACEPSMVC.Controllers
                         }
                     }
                 }
-
-                Noticia.DataCriacao = DateTime.Now;
+                
 
                 if (Noticia.Id == 0)
                 {
-                    //create
+                    Noticia.DataCriacao = DateTime.Now;
                     _db.Noticias.Add(Noticia);
                 }
                 else
                 {
+                    if (string.IsNullOrWhiteSpace(Noticia.ImagemDestaque))
+                    {
+                        Noticia.ImagemDestaque = noticiaDB.ImagemDestaque;
+                    }
+                    if (string.IsNullOrWhiteSpace(Noticia.ImagemInterna))
+                    {
+                        Noticia.ImagemInterna = noticiaDB.ImagemInterna;
+                    }
+                    
                     _db.Noticias.Update(Noticia);
                 }
                 _db.SaveChanges();

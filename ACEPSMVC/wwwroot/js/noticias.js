@@ -18,7 +18,7 @@ function loadDataTable() {
                 "data": "imagemDestaque", "width": "20%", "render": function (data) {
                     return '<img style="width: 30%" src="../noticias/' + data + '" />';
                 }
-            },{
+            }, {
                 "data": "imagemInterna", "width": "20%", "render": function (data) {
                     return '<img style="width: 30%" src="../noticias/' + data + '" />';
                 }

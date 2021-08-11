@@ -104,8 +104,8 @@
                                         <img class="img-fluid" src="~/img/imgnoticia.png" />
                                     </div>
                                     <div class="col-10">
-                                        <h4 class="texto-verde-primario">@noticia.Titulo</h4>
-                                        <p class="font-weight-bold">@noticia.DataCriacao.ToString("dd/MM/yyyy")</p>
+                                        <h6 class="texto-verde-primario">@noticia.Titulo</h6>
+                                        <small class="font-weight-bold">@noticia.DataCriacao.ToString("dd/MM/yyyy")</small>
                                         <p>
                                             @if (noticia.Texto != null && noticia.Texto.Length >= 100)
                                             {
@@ -114,7 +114,8 @@
                                             else
                                             {
                                                 @noticia.Texto.ToString()
-                                            }... <a asp-controller="Noticias" asp-action="Detalhes" asp-route-id="@noticia.Id" class="font-weight-bolder float-right"><i class="fa fa-plus"></i> Leia mais</a>
+                                            }... 
+                                            <a asp-controller="Noticias" asp-action="Detalhes" asp-route-id="@noticia.Id" class="font-weight-bolder float-right"><i class="fa fa-plus"></i> Leia mais</a>
                                         </p>
                                         <hr />
                                     </div>
