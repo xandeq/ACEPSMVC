@@ -94,7 +94,7 @@ namespace ACEPSMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Json(new { data = await _db.Noticias.OrderByDescending(o => o.DataCriacao).ToListAsync() });
+            return Json(new { data = await _db.Usuarios.OrderByDescending(o => o.NomeUsuario).ToListAsync() });
         }
 
         [HttpDelete]

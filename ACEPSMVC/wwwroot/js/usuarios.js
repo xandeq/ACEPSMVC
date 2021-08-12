@@ -13,8 +13,9 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "dataCriacao", "width": "20%" },
-            { "nomeUsuario": "nomeUsuario", "width": "20%" },
-            { "email": "email", "width": "20%" },
+            { "data": "nome", "width": "20%" },
+            { "data": "nomeUsuario", "width": "20%" },
+            { "data": "senha", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
